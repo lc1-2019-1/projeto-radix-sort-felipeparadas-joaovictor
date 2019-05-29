@@ -35,7 +35,7 @@ IMPORTING sorting, ints@mod_lems
 % A simple algebraic property of n_digits.
   d_digits_gt : LEMMA
    FORALL(n : nat): 10^(n_digits(n)) > n
-
+   
 % Three simple properties of remainder and exponential
 
  rem_div_div :  LEMMA
@@ -63,6 +63,8 @@ IMPORTING sorting, ints@mod_lems
    ENDIF
    MEASURE length(l)
 
+ max_digits_gt: LEMMA
+  FORALL(l: list[nat] | length(l) >= 1, k:nat | k<length(l)): 10^(1 + max_digits(l)) > nth(l, k)
 % is_sorted_ud? holds for lists of naturals sorted until the dth digit in their
 % decimal representation.
  is_sorted_ud?(l : list[nat], d : nat) : bool = FORALL(i : below[length(l)], j : below[length(l)] | i <= j) :
@@ -172,7 +174,7 @@ MEASURE length(l)
 %*** merge_sort and transitivity of permutations.
 %**************************************************************
 % radixsort from the dth until the kth digit permutes (preserves) data.
- radixsort_permutes : CONJECTURE
+  radixsort_permutes : CONJECTURE
   FORALL(l : list[nat], k : nat, d : nat | d <=k):
   permutations(l, radixsort(l,k,d))
 
